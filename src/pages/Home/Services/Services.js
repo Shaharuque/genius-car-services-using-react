@@ -28,7 +28,7 @@ const Services = () => {
         <div>
             <img  style={{margin:'20px'}}  src={services[1].img} alt=""/>
     </div>*/}
-            <div className='main-container'>
+            <div id='services' className='main-container'>
                 <p className='headline mt-4'>Welcome to varity of services of our company</p>
                 <div className='services-container'>
                     {
