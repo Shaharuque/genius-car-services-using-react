@@ -1,22 +1,37 @@
 import React, { useRef } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import auth from '../../../firebase.init';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 
 const Login = () => {
-
+    const navigate=useNavigate()
     //useState use na korey useRef ar through tey form a inputed user email and password get kora hocchey
     const emailRef=useRef('')
     const passwordRef=useRef('')
+    //useSignInWithEmailandPassword react-firebase-hook
+    const [
+        signInWithEmailAndPassword,
+        user,
+        loading,
+        error,
+      ] = useSignInWithEmailAndPassword(auth);
+
 
     const submitHandler=(e)=>{
         e.preventDefault()
         //input field thekey data collect korar 2nd way (input field thekey data collect kora 1st way holo useState use kora)
         const userEmail=emailRef.current.value         //returns the input field value
         const userPassword=passwordRef.current.value  //returns the input field value
-        console.log(userEmail,userPassword)
+        //console.log(userEmail,userPassword)
+        signInWithEmailAndPassword(userEmail,userPassword)
+    }
+    //userEmail and password db tey existing thakley user k navigate korey dibo ekta page a
+    if(user){
+        navigate('/')
     }
 
-    const navigate=useNavigate()
+    
     const nevigateToRegister=()=>{
         navigate('/register')
     }

@@ -1,11 +1,21 @@
 import React, { useRef } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
+import auth from '../../../firebase.init';
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 const Register = () => {
     const emailRef = useRef('')
     const passwordRef = useRef('')
-    const confirmRef = useRef('')
+    const nameRef=useRef('')
+
+    //react-firebase-hook(creating new user->register)
+    const [
+        createUserWithEmailAndPassword,
+        user,
+        loading,
+        error,
+      ] = useCreateUserWithEmailAndPassword(auth);
+
 
     const submitHandler = (e) => {
         e.preventDefault()
@@ -14,7 +24,14 @@ const Register = () => {
         const userEmail=e.target.email.value
         const userPassword=e.target.password.value
         console.log(userName,userEmail,userPassword)
+
+        createUserWithEmailAndPassword(userEmail,userPassword)
     }
+    const navigate=useNavigate()
+    if(user){
+        navigate('/')
+    }
+    
 
     return (
         <div>
@@ -24,7 +41,7 @@ const Register = () => {
 
                     <Form.Group className="mb-3" controlId="formBasicName">
                         <Form.Label>Name</Form.Label>
-                        <Form.Control className='w-75' name='name' type="text" placeholder="Name" required />
+                        <Form.Control className='w-75' name='name' ref={nameRef} type="text" placeholder="Name" required />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
@@ -39,10 +56,6 @@ const Register = () => {
                         <Form.Control className='w-75' name='password' ref={passwordRef} type="password" placeholder="Password" required />
                     </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="formBasicPass">
-                        <Form.Label>Confirm Password</Form.Label>
-                        <Form.Control className='w-75' ref={confirmRef} type="password" placeholder="Confirm-password" required />
-                    </Form.Group>
                     <Button variant="primary" type="submit">
                         Register
                     </Button>
