@@ -10,6 +10,7 @@ const Login = () => {
 
     const submitHandler=(e)=>{
         e.preventDefault()
+        //input field thekey data collect korar 2nd way (input field thekey data collect kora 1st way holo useState use kora)
         const userEmail=emailRef.current.value         //returns the input field value
         const userPassword=passwordRef.current.value  //returns the input field value
         console.log(userEmail,userPassword)
@@ -36,8 +37,8 @@ const Login = () => {
                     <Form.Label>Password</Form.Label>
                     <Form.Control ref={passwordRef} type="password" placeholder="Password" required />
                 </Form.Group>
-                <Button variant="primary" type="submit">
-                    Submit
+                <Button style={{color:'white',backgroundColor:'lightgreen',border:'1px solid lightgreen'}} type="submit">
+                    Login
                 </Button>
             </Form>
             <p style={{marginTop:'10px'}}>New to genius car? <span onClick={nevigateToRegister} style={{color:'red',cursor:'pointer'}}>register now</span></p>
