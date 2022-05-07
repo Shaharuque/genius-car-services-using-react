@@ -29,7 +29,7 @@ const Services = () => {
             <img  style={{margin:'20px'}}  src={services[1].img} alt=""/>
     </div>*/}
             <div className='main-container'>
-                <p className='headline'>Welcome to varity of services of our company</p>
+                <p className='headline mt-4'>Welcome to varity of services of our company</p>
                 <div className='services-container'>
                     {
                         services.map(service => <Service service={service} key={service.id}></Service>)
