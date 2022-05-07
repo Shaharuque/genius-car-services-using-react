@@ -39,7 +39,7 @@ const Register = () => {
                         <Form.Control className='w-75' name='password' ref={passwordRef} type="password" placeholder="Password" required />
                     </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Group className="mb-3" controlId="formBasicPass">
                         <Form.Label>Confirm Password</Form.Label>
                         <Form.Control className='w-75' ref={confirmRef} type="password" placeholder="Confirm-password" required />
                     </Form.Group>
