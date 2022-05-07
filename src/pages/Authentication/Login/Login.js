@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 
@@ -16,7 +16,10 @@ const Login = () => {
         loading,
         error,
       ] = useSignInWithEmailAndPassword(auth);
-
+    
+    //user login kora na tahley to login page a niye jabey plus user login korar por shei user k jei page thekey login ar jnno ashsey shei page a niye jabey
+    const location=useLocation()
+    let from = location.state?.from?.pathname || "/";
 
     const submitHandler=(e)=>{
         e.preventDefault()
@@ -28,7 +31,7 @@ const Login = () => {
     }
     //userEmail and password db tey existing thakley user k navigate korey dibo ekta page a
     if(user){
-        navigate('/')
+        navigate(from, { replace: true });
     }
 
     
