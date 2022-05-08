@@ -2,7 +2,7 @@ import React from 'react';
 import Glogo from '../../../images/images/google.png'
 import facebook from '../../../images/images/facebook.png'
 import git from '../../../images/images/git.png'
-import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,15 +10,17 @@ const SocialLogin = () => {
     const navigate = useNavigate()
     //for google sign in purpose
     const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+    //for github signin purpose
+    const [signInWithGithub, userGit, loadingGit, errorGit] = useSignInWithGithub(auth);
 
     let errorElement;
-    if (error) {
+    if (error || errorGit) {
         errorElement = <div>
-            <p style={{color:'red',textAlign:'center',fontFamily:'monospace'}}>Error: {error.message}</p>
+            <p style={{color:'red',textAlign:'center',fontFamily:'monospace'}}>Error: {error?.message} {errorGit?.message}</p>
         </div>
     }
 
-    if (user) {
+    if (user || userGit) {
         navigate('/home')
     }
 
@@ -38,12 +40,12 @@ const SocialLogin = () => {
                     <span style={{ textAlign: 'center' }}>Sign in with Google</span>
                 </button>
 
-                <button style={{ borderRadius: '5px', border: '3px solid gray', padding: '5px', marginBottom: '10px', width: '250px' }}>
+                <button style={{ borderRadius: '5px', border: '3px solid gray', padding: '5px', marginBottom: '10px', width: '250px' }} >
                     <img style={{ width: '20px', height: '20px', marginRight: '15px' }} src={facebook} alt="" />
                     <span style={{ textAlign: 'center' }}>Sign in with Facebook</span>
                 </button>
 
-                <button style={{ borderRadius: '5px', border: '3px solid gray', padding: '5px', marginBottom: '10px', width: '250px' }}>
+                <button style={{ borderRadius: '5px', border: '3px solid gray', padding: '5px', marginBottom: '10px', width: '250px' }} onClick={()=>signInWithGithub()}>
                     <img style={{ width: '20px', height: '20px', marginRight: '15px' }} src={git} alt="" />
                     <span style={{ textAlign: 'center' }}>Sign in with Github</span>
                 </button>
