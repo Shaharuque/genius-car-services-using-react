@@ -3,6 +3,7 @@ import { Button, Form } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import SocialLogin from '../SocialLogin/SocialLogin';
 
 const Login = () => {
     const navigate=useNavigate()
@@ -34,7 +35,7 @@ const Login = () => {
         navigate(from, { replace: true });
     }
 
-    
+    //console.log(user)
     const nevigateToRegister=()=>{
         navigate('/register')
     }
@@ -46,9 +47,6 @@ const Login = () => {
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control ref={emailRef} type="email" placeholder="Enter email" required/>
-                    <Form.Text className="text-muted">
-                        We'll never share your email with anyone else.
-                    </Form.Text>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -58,8 +56,11 @@ const Login = () => {
                 <Button style={{color:'white',backgroundColor:'lightgreen',border:'1px solid lightgreen'}} type="submit">
                     Login
                 </Button>
+                <p style={{color:'red',fontWeight:'600'}}>{error?.message}</p>
             </Form>
             <p style={{marginTop:'10px'}}>New to genius car? <span onClick={nevigateToRegister} style={{color:'red',cursor:'pointer'}}>register now</span></p>
+
+            <SocialLogin></SocialLogin>
         </div>
     );
 };
