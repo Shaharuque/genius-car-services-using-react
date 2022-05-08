@@ -4,6 +4,10 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import SocialLogin from '../SocialLogin/SocialLogin';
+import Loading from '../../Shared/Loading/Loading';
+//for tostify
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
     const navigate=useNavigate()
@@ -36,7 +40,12 @@ const Login = () => {
     if(user){
         navigate(from, { replace: true });
     }
-
+    
+    //page show korar agey spinner show korassi
+    if(loading|| sending){
+        return <Loading></Loading>
+    }
+    
     //error show
     let errorElement;
     if(error){
@@ -51,8 +60,13 @@ const Login = () => {
     }
     const resetPassword=async ()=>{
         const userEmail=emailRef.current.value         //returns the input field value(user email)
-        await sendPasswordResetEmail(userEmail);
-        alert('Sent email');
+        if(userEmail){
+            await sendPasswordResetEmail(userEmail);
+            toast('password reset link sent into your mail adress');
+        }
+        else{
+            toast('Provide valid email please')
+        }
     }
 
 
@@ -79,6 +93,7 @@ const Login = () => {
             <p style={{marginTop:'10px'}}>Forget password? <span onClick={resetPassword} style={{color:'teal',cursor:'pointer'}}>Reset password</span></p>
 
             <SocialLogin></SocialLogin>
+            <ToastContainer />
         </div>
     );
 };

@@ -5,6 +5,7 @@ import git from '../../../images/images/git.png'
 import { useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import { useNavigate } from 'react-router-dom';
+import Loading from '../../Shared/Loading/Loading';
 
 const SocialLogin = () => {
     const navigate = useNavigate()
@@ -13,6 +14,10 @@ const SocialLogin = () => {
     //for github signin purpose
     const [signInWithGithub, userGit, loadingGit, errorGit] = useSignInWithGithub(auth);
 
+    if(loading|| loadingGit){
+        return <Loading></Loading>
+    }
+    
     let errorElement;
     if (error || errorGit) {
         errorElement = <div>

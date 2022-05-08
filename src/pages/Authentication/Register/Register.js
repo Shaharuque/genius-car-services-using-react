@@ -5,6 +5,7 @@ import auth from '../../../firebase.init';
 import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import { async } from '@firebase/util';
+import Loading from '../../Shared/Loading/Loading';
 const Register = () => {
     const navigate=useNavigate()
     const emailRef = useRef('')
@@ -44,6 +45,10 @@ const Register = () => {
         //then registering ar kaj hoye geley navigate user to home
         navigate('/home')
         
+    }
+    
+    if(loading|| updating){
+        return <Loading></Loading>
     }
     
     if(user){
