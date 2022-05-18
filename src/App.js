@@ -1,16 +1,18 @@
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import './App.css';
 import Header from './pages/Shared/Header/Header'
 import Footer from './pages/Shared/Footer/Footer'
 import Home from './pages/Home/Home/Home'
 import About from './pages/About/About'
-import Services from './pages/Home/Services/Services'
+// import Services from './pages/Home/Services/Services'
 import NoPageFound from './pages/NoPage/NoPageFound'
 import ServiceDetail from "./pages/ServiceDetail/ServiceDetail";
 import Login from "./pages/Authentication/Login/Login";
 import Register from "./pages/Authentication/Register/Register";
 import Checkout from "./pages/Checkout/Checkout";
 import RequireAuth from "./pages/Authentication/RequireAuth/RequireAuth";
+import AddService from "./pages/AddService/AddService";
+import ManageServices from "./pages/ManageServices/ManageServices";
 
 function App() {
   return (
@@ -28,7 +30,19 @@ function App() {
           </RequireAuth>
         }>
         </Route>
+        <Route path="/addservice" element={
+          <RequireAuth>
+            <AddService />
+          </RequireAuth>
+        }>
+        </Route>
 
+        <Route path="/manageservice" element={
+          <RequireAuth>
+            <ManageServices/>
+          </RequireAuth>
+        }>
+        </Route>
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="/register" element={<Register></Register>}></Route>
         <Route path='*' element={<NoPageFound></NoPageFound>} />

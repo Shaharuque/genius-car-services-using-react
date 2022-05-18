@@ -3,6 +3,8 @@
     border: 1px solid rgb(209, 206, 206);
     padding: 5px;
     text-align: center;
+    width: 400px;
+    height: 450px;
 }
 
 .service-container button{

@@ -1,0 +1,13 @@
+.checkoutStyle{
+    margin: 100px;
+    border: 2px solid gray;
+    border-radius: 5px;
+    padding: 10px;
+}
+h4{
+    color: aqua;
+    font-family: sans-serif;
+}
+h4:hover{
+    color: rgb(89, 17, 122);
+}
