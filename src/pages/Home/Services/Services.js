@@ -13,7 +13,7 @@ const Services = () => {
     const [services, setServices] = useState([])
     //for data load
     useEffect(() => {
-        fetch('services.json')
+        fetch('http://localhost:5000/service')  //this url is our own url we made and the data saved on mongoDB
             .then(res => res.json())
             .then(data => setServices(data))
     }, [])    //dependency empty means useEffect ek bar call hobey kinto dependency tey kicho thaka means jeita dependency tey rakha asey seitar change ar basis a useEffect bar bar call hobey
@@ -32,7 +32,7 @@ const Services = () => {
                 <p className='headline mt-4'>Welcome to varity of services of our company</p>
                 <div className='services-container'>
                     {
-                        services.map(service => <Service service={service} key={service.id}></Service>)
+                        services.map(service => <Service service={service} key={service._id}></Service>)
                     }
                 </div>
             </div>
