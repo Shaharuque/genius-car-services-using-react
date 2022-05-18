@@ -36,7 +36,7 @@ const Login = () => {
         console.log(userEmail,userPassword)
         signInWithEmailAndPassword(userEmail,userPassword)
     }
-    //userEmail and password db tey existing thakley user k navigate korey dibo ekta page a
+    //userEmail and password db tey existing thakley user k navigate korey dibo ekta page a 
     if(user){
         navigate(from, { replace: true });
     }
