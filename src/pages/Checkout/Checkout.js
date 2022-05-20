@@ -4,10 +4,14 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import './CheckOut.css'
 import { Form } from 'react-bootstrap';
+import useServiceDetails from '../../CustomHooks/useServiceDetails';
 
 
 const Checkout = () => {
-    const {serviceId}=useParams()
+    const {id}=useParams()
+
+    //useServiceDetails hook call to get each service data based on serviceId
+    const [service]=useServiceDetails(id)  //id=serviceId both same here 
     const nameRef=useRef('')
     const phoneRef=useRef('')
     const emailRef=useRef('')
@@ -39,8 +43,9 @@ const Checkout = () => {
     return (
         <>
         <div className='checkoutStyle'>
+        <p>CheckOut Page for: {service.name}</p>
             <div style={{display:'flex',justifyContent:'space-between'}}>
-                <h4>Thank You for Selecting this package</h4>
+                <h4>Thank You for Selecting this '{service.name}' package</h4>
                 <button onClick={btnCliked} style={{borderRadius:'5px',color:'teal'}}>X</button>
             </div>
 

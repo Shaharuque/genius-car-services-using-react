@@ -24,7 +24,7 @@ function App() {
         <Route path="/service/:serviceId" element={<ServiceDetail></ServiceDetail>}></Route>
         <Route path="about" element={<About />} />
         {/*protected route */}
-        <Route path="/checkout" element={
+        <Route path="/checkout/:id" element={
           <RequireAuth>
             <Checkout />
           </RequireAuth>

@@ -10,7 +10,7 @@ const AddService = () => {
         const price = e.target.price.value;
         const img = e.target.img.value;
 
-        const service = { name, description,price,img }; 
+        const service = { name, description,price,img };   //object form a data server a pathatey hobey
         console.log(service)
 
         //server ar jei url a post kortey chassi sheita
