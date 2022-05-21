@@ -13,6 +13,10 @@ import Checkout from "./pages/Checkout/Checkout";
 import RequireAuth from "./pages/Authentication/RequireAuth/RequireAuth";
 import AddService from "./pages/AddService/AddService";
 import ManageServices from "./pages/ManageServices/ManageServices";
+//for tostify
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Order from "./pages/Order/Order";
 
 function App() {
   return (
@@ -43,11 +47,18 @@ function App() {
           </RequireAuth>
         }>
         </Route>
+        <Route path="/orders" element={
+          <RequireAuth>
+            <Order/>
+          </RequireAuth>
+        }>
+        </Route>
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="/register" element={<Register></Register>}></Route>
         <Route path='*' element={<NoPageFound></NoPageFound>} />
       </Routes>
       <Footer></Footer>
+      <ToastContainer></ToastContainer>
     </div>
   );
 }

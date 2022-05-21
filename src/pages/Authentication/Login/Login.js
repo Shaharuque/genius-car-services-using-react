@@ -8,6 +8,7 @@ import Loading from '../../Shared/Loading/Loading';
 //for tostify
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
 
 const Login = () => {
     const navigate=useNavigate()
@@ -28,17 +29,19 @@ const Login = () => {
     const location=useLocation()
     let from = location.state?.from?.pathname || "/";
 
-    const submitHandler=(e)=>{
+    const submitHandler=async(e)=>{
         e.preventDefault()
         //input field thekey data collect korar 2nd way (input field thekey data collect kora 1st way holo useState use kora)
         const userEmail=emailRef.current.value         //returns the input field value(user email)
         const userPassword=passwordRef.current.value  //returns the input field value (user password)
         console.log(userEmail,userPassword)
-        signInWithEmailAndPassword(userEmail,userPassword)
+        await signInWithEmailAndPassword(userEmail,userPassword)
+        const {data}=axios.post('http://localhost:5000/login',{userEmail})
+        console.log(data)
     }
     //userEmail and password db tey existing thakley user k navigate korey dibo ekta page a 
     if(user){
-        navigate(from, { replace: true });
+        //navigate(from, { replace: true });
     }
     
     //page show korar agey spinner show korassi
